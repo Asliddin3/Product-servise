@@ -1,7 +1,7 @@
 package grpcClient
 
 import (
-    "github.com/Asliddin3/Product-service/config"
+    "github.com/Asliddin3/Product-servise/config"
 )
 
 //GrpcClientI ...

@@ -1,7 +1,7 @@
 package postgres
 
 import (
-	pb "github.com/Asiddin3/Product-servise/genproto"
+	pb "github.com/Asliddin3/Product-servise/genproto"
 	"github.com/jmoiron/sqlx"
 )
 

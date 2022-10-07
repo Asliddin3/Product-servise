@@ -1,4 +1,4 @@
-module github.com/Asiddin3/Product-servise
+module github.com/Asliddin3/Product-servise
 
 go 1.18
 

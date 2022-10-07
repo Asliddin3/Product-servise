@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 
-	"github.com/Asiddin3/Product-servise/config"
+	"github.com/Asliddin3/Product-servise/config"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )

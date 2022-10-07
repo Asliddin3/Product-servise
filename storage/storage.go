@@ -1,8 +1,8 @@
 package storage
 
 import (
-	"github.com/Asiddin3/Product-servise/storage/postgres"
-	"github.com/Asiddin3/Product-servise/storage/repo"
+	"github.com/Asliddin3/Product-servise/storage/postgres"
+	"github.com/Asliddin3/Product-servise/storage/repo"
 	"github.com/jmoiron/sqlx"
 )
 
