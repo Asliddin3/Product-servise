@@ -10,7 +10,7 @@ type productRepo struct{
 }
 
 
-func NewProduct(db *sqlx.DB) *productRepo{
+func NewProductRepo(db *sqlx.DB) *productRepo{
 	return &productRepo{db: db}
 }
 
