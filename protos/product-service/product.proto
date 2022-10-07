@@ -1,0 +1,22 @@
+syntax ="proto3";
+
+package product;
+
+service ProductService{
+  rpc Create(ProductRequest)returns (Product);
+}
+
+message ProductRequest{
+  string name = 1;
+  int64 price=2;
+  int64 categoryid = 3;
+  int64 typeid = 4;
+}
+
+message Product{
+  int64 id =1;
+  string name = 2;
+  int64 price=3;
+  int64 categoryid = 4;
+  int64 typeid = 5;
+}
