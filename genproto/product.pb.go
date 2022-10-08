@@ -27,10 +27,10 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Products struct {
-	Products             []*Product `protobuf:"bytes,1,rep,name=products,proto3" json:"products"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	Products             []*ProductResponse `protobuf:"bytes,1,rep,name=products,proto3" json:"products"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
 func (m *Products) Reset()         { *m = Products{} }
@@ -66,11 +66,82 @@ func (m *Products) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Products proto.InternalMessageInfo
 
-func (m *Products) GetProducts() []*Product {
+func (m *Products) GetProducts() []*ProductResponse {
 	if m != nil {
 		return m.Products
 	}
 	return nil
+}
+
+type ProductResponse struct {
+	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
+	Price                int64    `protobuf:"varint,2,opt,name=price,proto3" json:"price"`
+	Category             string   `protobuf:"bytes,3,opt,name=category,proto3" json:"category"`
+	Type                 string   `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ProductResponse) Reset()         { *m = ProductResponse{} }
+func (m *ProductResponse) String() string { return proto.CompactTextString(m) }
+func (*ProductResponse) ProtoMessage()    {}
+func (*ProductResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f0fd8b59378f44a5, []int{1}
+}
+func (m *ProductResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ProductResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ProductResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ProductResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProductResponse.Merge(m, src)
+}
+func (m *ProductResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *ProductResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProductResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProductResponse proto.InternalMessageInfo
+
+func (m *ProductResponse) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *ProductResponse) GetPrice() int64 {
+	if m != nil {
+		return m.Price
+	}
+	return 0
+}
+
+func (m *ProductResponse) GetCategory() string {
+	if m != nil {
+		return m.Category
+	}
+	return ""
+}
+
+func (m *ProductResponse) GetType() string {
+	if m != nil {
+		return m.Type
+	}
+	return ""
 }
 
 type Empty struct {
@@ -83,7 +154,7 @@ func (m *Empty) Reset()         { *m = Empty{} }
 func (m *Empty) String() string { return proto.CompactTextString(m) }
 func (*Empty) ProtoMessage()    {}
 func (*Empty) Descriptor() ([]byte, []int) {
-	return fileDescriptor_f0fd8b59378f44a5, []int{1}
+	return fileDescriptor_f0fd8b59378f44a5, []int{2}
 }
 func (m *Empty) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -123,7 +194,7 @@ func (m *GetProductId) Reset()         { *m = GetProductId{} }
 func (m *GetProductId) String() string { return proto.CompactTextString(m) }
 func (*GetProductId) ProtoMessage()    {}
 func (*GetProductId) Descriptor() ([]byte, []int) {
-	return fileDescriptor_f0fd8b59378f44a5, []int{2}
+	return fileDescriptor_f0fd8b59378f44a5, []int{3}
 }
 func (m *GetProductId) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -170,7 +241,7 @@ func (m *TypeRequest) Reset()         { *m = TypeRequest{} }
 func (m *TypeRequest) String() string { return proto.CompactTextString(m) }
 func (*TypeRequest) ProtoMessage()    {}
 func (*TypeRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_f0fd8b59378f44a5, []int{3}
+	return fileDescriptor_f0fd8b59378f44a5, []int{4}
 }
 func (m *TypeRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -218,7 +289,7 @@ func (m *Type) Reset()         { *m = Type{} }
 func (m *Type) String() string { return proto.CompactTextString(m) }
 func (*Type) ProtoMessage()    {}
 func (*Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_f0fd8b59378f44a5, []int{4}
+	return fileDescriptor_f0fd8b59378f44a5, []int{5}
 }
 func (m *Type) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -272,7 +343,7 @@ func (m *CategoryRequest) Reset()         { *m = CategoryRequest{} }
 func (m *CategoryRequest) String() string { return proto.CompactTextString(m) }
 func (*CategoryRequest) ProtoMessage()    {}
 func (*CategoryRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_f0fd8b59378f44a5, []int{5}
+	return fileDescriptor_f0fd8b59378f44a5, []int{6}
 }
 func (m *CategoryRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -320,7 +391,7 @@ func (m *Category) Reset()         { *m = Category{} }
 func (m *Category) String() string { return proto.CompactTextString(m) }
 func (*Category) ProtoMessage()    {}
 func (*Category) Descriptor() ([]byte, []int) {
-	return fileDescriptor_f0fd8b59378f44a5, []int{6}
+	return fileDescriptor_f0fd8b59378f44a5, []int{7}
 }
 func (m *Category) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -377,7 +448,7 @@ func (m *ProductRequest) Reset()         { *m = ProductRequest{} }
 func (m *ProductRequest) String() string { return proto.CompactTextString(m) }
 func (*ProductRequest) ProtoMessage()    {}
 func (*ProductRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_f0fd8b59378f44a5, []int{7}
+	return fileDescriptor_f0fd8b59378f44a5, []int{8}
 }
 func (m *ProductRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -449,7 +520,7 @@ func (m *Product) Reset()         { *m = Product{} }
 func (m *Product) String() string { return proto.CompactTextString(m) }
 func (*Product) ProtoMessage()    {}
 func (*Product) Descriptor() ([]byte, []int) {
-	return fileDescriptor_f0fd8b59378f44a5, []int{8}
+	return fileDescriptor_f0fd8b59378f44a5, []int{9}
 }
 func (m *Product) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -515,6 +586,7 @@ func (m *Product) GetTypeid() int64 {
 
 func init() {
 	proto.RegisterType((*Products)(nil), "product.Products")
+	proto.RegisterType((*ProductResponse)(nil), "product.ProductResponse")
 	proto.RegisterType((*Empty)(nil), "product.Empty")
 	proto.RegisterType((*GetProductId)(nil), "product.GetProductId")
 	proto.RegisterType((*TypeRequest)(nil), "product.TypeRequest")
@@ -528,32 +600,34 @@ func init() {
 func init() { proto.RegisterFile("product.proto", fileDescriptor_f0fd8b59378f44a5) }
 
 var fileDescriptor_f0fd8b59378f44a5 = []byte{
-	// 386 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x93, 0xdf, 0x4a, 0xeb, 0x40,
-	0x10, 0xc6, 0x4f, 0x9a, 0xf4, 0xcf, 0x99, 0x9e, 0xe6, 0xf4, 0x2c, 0x3d, 0x1a, 0x72, 0x11, 0x6a,
-	0x40, 0x28, 0x22, 0x45, 0x5b, 0x14, 0x6f, 0xbc, 0xb1, 0x8a, 0x78, 0x27, 0x51, 0x1f, 0xa0, 0x76,
-	0x07, 0x09, 0x58, 0xb3, 0x6e, 0xb6, 0x42, 0xf0, 0x19, 0xbc, 0xf7, 0x91, 0xbc, 0xf4, 0x11, 0xa4,
-	0xbe, 0x88, 0x74, 0xb3, 0xd9, 0xc6, 0x86, 0x96, 0x7a, 0xb7, 0x3b, 0xf3, 0xfb, 0xe6, 0xdb, 0xc9,
-	0x4c, 0xa0, 0xc1, 0x78, 0x44, 0x27, 0x23, 0xd1, 0x65, 0x3c, 0x12, 0x11, 0xa9, 0xaa, 0xab, 0x7f,
-	0x04, 0xb5, 0xcb, 0xf4, 0x18, 0x93, 0x5d, 0xa8, 0xa9, 0x70, 0xec, 0x18, 0x6d, 0xb3, 0x53, 0xef,
-	0x35, 0xbb, 0x99, 0x4c, 0x41, 0x81, 0x26, 0xfc, 0x2a, 0x94, 0xcf, 0xc6, 0x4c, 0x24, 0xbe, 0x07,
-	0x7f, 0xce, 0x51, 0x28, 0xe0, 0x82, 0x12, 0x1b, 0x4a, 0x21, 0x75, 0x8c, 0xb6, 0xd1, 0x31, 0x83,
-	0x52, 0x48, 0xfd, 0x2d, 0xa8, 0x5f, 0x27, 0x0c, 0x03, 0x7c, 0x9c, 0x60, 0x2c, 0x08, 0x01, 0xeb,
-	0x61, 0x38, 0x46, 0x09, 0xfc, 0x0e, 0xe4, 0xd9, 0xdf, 0x01, 0x6b, 0x86, 0x2c, 0x4a, 0x35, 0x5b,
-	0xca, 0xb1, 0xdb, 0xf0, 0x77, 0x30, 0x14, 0x78, 0x17, 0xf1, 0x64, 0x55, 0xc9, 0x2e, 0xd4, 0x32,
-	0x6c, 0xad, 0xb2, 0x1c, 0xec, 0xac, 0xc7, 0xe5, 0x55, 0x49, 0x0b, 0xca, 0x8c, 0x87, 0xa3, 0x54,
-	0x6a, 0x06, 0xe9, 0x85, 0x78, 0x00, 0x23, 0xe5, 0x15, 0x52, 0xc7, 0x94, 0xa9, 0x5c, 0x84, 0x6c,
-	0x40, 0x45, 0x24, 0x0c, 0x43, 0xea, 0x58, 0x32, 0xa7, 0x6e, 0xfe, 0x33, 0x54, 0x95, 0xe7, 0x3a,
-	0x4f, 0x9c, 0x9b, 0x9b, 0xcb, 0xcd, 0xad, 0x15, 0xe6, 0xe5, 0xbc, 0x79, 0xef, 0xc5, 0xd4, 0x1d,
-	0x5f, 0x21, 0x7f, 0x9a, 0x95, 0xea, 0x43, 0x65, 0xc0, 0x71, 0x28, 0x90, 0x6c, 0x16, 0x06, 0x9f,
-	0x7e, 0x14, 0xb7, 0xb0, 0x11, 0x64, 0x1f, 0x20, 0x15, 0xc9, 0x09, 0xb6, 0x74, 0x3e, 0x37, 0x73,
-	0xb7, 0xf1, 0x2d, 0x4a, 0x8e, 0xc1, 0x4e, 0x25, 0x7a, 0x42, 0x8e, 0x06, 0x16, 0x66, 0xeb, 0xfe,
-	0x2b, 0x64, 0x66, 0xcf, 0xbc, 0x61, 0xf4, 0x87, 0xcf, 0x3c, 0x84, 0xc6, 0x29, 0xde, 0xa3, 0xc0,
-	0x2c, 0xf0, 0x5f, 0x23, 0xf9, 0xed, 0x75, 0x6d, 0x1d, 0x96, 0xdb, 0x4d, 0x0e, 0x00, 0xe6, 0xf9,
-	0x65, 0xa2, 0xa2, 0xdd, 0x1e, 0xd4, 0xe7, 0x44, 0x4c, 0x16, 0xaa, 0xe6, 0xba, 0xca, 0x90, 0x93,
-	0xe6, 0xdb, 0xd4, 0x33, 0xde, 0xa7, 0x9e, 0xf1, 0x31, 0xf5, 0x8c, 0xd7, 0x4f, 0xef, 0xd7, 0x6d,
-	0x45, 0xfe, 0xab, 0xfd, 0xaf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x3c, 0xea, 0xb5, 0x4e, 0xbc, 0x03,
-	0x00, 0x00,
+	// 430 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x54, 0xd1, 0x8a, 0xd3, 0x50,
+	0x10, 0x35, 0xb9, 0x69, 0x1a, 0xa7, 0x36, 0xad, 0x97, 0xaa, 0x21, 0x0f, 0xa1, 0x06, 0x84, 0x22,
+	0x52, 0xb4, 0x15, 0xdf, 0x0a, 0x62, 0x15, 0xf1, 0x4d, 0xae, 0xfa, 0x01, 0xb5, 0x19, 0x24, 0x68,
+	0x9b, 0x6b, 0x72, 0x2b, 0x04, 0xff, 0x61, 0x9f, 0xf7, 0x93, 0xf6, 0x71, 0x3f, 0x61, 0xe9, 0xfe,
+	0xc8, 0x92, 0x9b, 0xe4, 0x26, 0x9b, 0x36, 0xa5, 0x6f, 0x77, 0x66, 0xce, 0x9c, 0x33, 0x39, 0x33,
+	0x2d, 0xf4, 0x79, 0x1c, 0x05, 0xbb, 0xb5, 0x98, 0xf2, 0x38, 0x12, 0x11, 0xed, 0x16, 0xa1, 0xff,
+	0x1e, 0xac, 0xaf, 0xf9, 0x33, 0xa1, 0x6f, 0xc1, 0x2a, 0xd2, 0x89, 0xa3, 0x8d, 0xc9, 0xa4, 0x37,
+	0x73, 0xa6, 0x65, 0x5b, 0x01, 0x62, 0x98, 0xf0, 0x68, 0x9b, 0x20, 0x53, 0x48, 0xff, 0x37, 0x0c,
+	0x1a, 0x45, 0x4a, 0xc1, 0xd8, 0xae, 0x36, 0xe8, 0x68, 0x63, 0x6d, 0xf2, 0x90, 0xc9, 0x37, 0x1d,
+	0x41, 0x87, 0xc7, 0xe1, 0x1a, 0x1d, 0x7d, 0xac, 0x4d, 0x08, 0xcb, 0x03, 0xea, 0x82, 0xb5, 0x5e,
+	0x09, 0xfc, 0x15, 0xc5, 0xa9, 0x43, 0x24, 0x5a, 0xc5, 0x19, 0x8b, 0x48, 0x39, 0x3a, 0x46, 0xce,
+	0x92, 0xbd, 0xfd, 0x2e, 0x74, 0x3e, 0x6d, 0xb8, 0x48, 0x7d, 0x0f, 0x1e, 0x7d, 0x46, 0x51, 0x08,
+	0x7f, 0x09, 0xa8, 0x0d, 0x7a, 0x18, 0x48, 0x41, 0xc2, 0xf4, 0x30, 0xf0, 0x9f, 0x43, 0xef, 0x7b,
+	0xca, 0x91, 0xe1, 0xdf, 0x1d, 0x26, 0xe2, 0xd8, 0x44, 0xfe, 0x4b, 0x30, 0x32, 0x48, 0xb3, 0x55,
+	0x61, 0xf5, 0x1a, 0xf6, 0x05, 0x0c, 0x96, 0xc5, 0x5c, 0xa7, 0x28, 0xa7, 0x60, 0x95, 0xb0, 0xb3,
+	0x68, 0x63, 0xb0, 0x95, 0x77, 0xad, 0xac, 0x2d, 0xd6, 0x79, 0x00, 0xa5, 0x55, 0x61, 0x20, 0xcd,
+	0x23, 0xac, 0x96, 0xa1, 0x4f, 0xc1, 0xcc, 0x2c, 0x0b, 0x03, 0x69, 0x20, 0x61, 0x45, 0xe4, 0xff,
+	0x87, 0x6e, 0xa1, 0x79, 0xce, 0x88, 0x95, 0x38, 0x69, 0x17, 0x37, 0x4e, 0x88, 0x77, 0xea, 0xe2,
+	0xb3, 0x0b, 0xa2, 0xbe, 0xf8, 0x1b, 0xc6, 0xff, 0x32, 0xaa, 0x39, 0x98, 0xcb, 0x18, 0x57, 0x02,
+	0xe9, 0xb3, 0xc3, 0x6b, 0x93, 0xa6, 0xb8, 0xc3, 0x66, 0x81, 0xbe, 0x01, 0xc8, 0x9b, 0xe4, 0x06,
+	0x47, 0xaa, 0x5e, 0xdb, 0xb9, 0xdb, 0xbf, 0x97, 0xa5, 0x0b, 0xb0, 0xf3, 0x16, 0xb5, 0xa1, 0xea,
+	0xba, 0x1b, 0xbb, 0x75, 0x1f, 0x1f, 0x54, 0xe8, 0x2b, 0x30, 0x7f, 0xf0, 0x20, 0x1b, 0xf3, 0x60,
+	0x9a, 0x23, 0xf3, 0xbd, 0x83, 0xfe, 0x47, 0xfc, 0x83, 0x02, 0xcb, 0xc4, 0x13, 0x05, 0xa9, 0x9f,
+	0xad, 0x6b, 0xab, 0xb4, 0x3c, 0x6b, 0xba, 0x00, 0xa8, 0xea, 0x6d, 0x4d, 0xad, 0xbf, 0x4a, 0xfa,
+	0x1a, 0x7a, 0x15, 0x32, 0xa1, 0x0d, 0xf6, 0xda, 0x67, 0x95, 0x90, 0x0f, 0xc3, 0xab, 0xbd, 0xa7,
+	0x5d, 0xef, 0x3d, 0xed, 0x66, 0xef, 0x69, 0x97, 0xb7, 0xde, 0x83, 0x9f, 0xa6, 0xfc, 0x87, 0x98,
+	0xdf, 0x05, 0x00, 0x00, 0xff, 0xff, 0x97, 0x11, 0xd6, 0x07, 0x32, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -571,9 +645,9 @@ type ProductServiceClient interface {
 	Create(ctx context.Context, in *ProductRequest, opts ...grpc.CallOption) (*Product, error)
 	CreateType(ctx context.Context, in *TypeRequest, opts ...grpc.CallOption) (*Type, error)
 	CreateCategory(ctx context.Context, in *CategoryRequest, opts ...grpc.CallOption) (*Category, error)
-	Update(ctx context.Context, in *ProductRequest, opts ...grpc.CallOption) (*Product, error)
+	Update(ctx context.Context, in *Product, opts ...grpc.CallOption) (*Product, error)
 	DeleteProduct(ctx context.Context, in *GetProductId, opts ...grpc.CallOption) (*Empty, error)
-	GetProduct(ctx context.Context, in *GetProductId, opts ...grpc.CallOption) (*Product, error)
+	GetProduct(ctx context.Context, in *GetProductId, opts ...grpc.CallOption) (*ProductResponse, error)
 	GetProducts(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Products, error)
 }
 
@@ -612,7 +686,7 @@ func (c *productServiceClient) CreateCategory(ctx context.Context, in *CategoryR
 	return out, nil
 }
 
-func (c *productServiceClient) Update(ctx context.Context, in *ProductRequest, opts ...grpc.CallOption) (*Product, error) {
+func (c *productServiceClient) Update(ctx context.Context, in *Product, opts ...grpc.CallOption) (*Product, error) {
 	out := new(Product)
 	err := c.cc.Invoke(ctx, "/product.ProductService/Update", in, out, opts...)
 	if err != nil {
@@ -630,8 +704,8 @@ func (c *productServiceClient) DeleteProduct(ctx context.Context, in *GetProduct
 	return out, nil
 }
 
-func (c *productServiceClient) GetProduct(ctx context.Context, in *GetProductId, opts ...grpc.CallOption) (*Product, error) {
-	out := new(Product)
+func (c *productServiceClient) GetProduct(ctx context.Context, in *GetProductId, opts ...grpc.CallOption) (*ProductResponse, error) {
+	out := new(ProductResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/GetProduct", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -653,9 +727,9 @@ type ProductServiceServer interface {
 	Create(context.Context, *ProductRequest) (*Product, error)
 	CreateType(context.Context, *TypeRequest) (*Type, error)
 	CreateCategory(context.Context, *CategoryRequest) (*Category, error)
-	Update(context.Context, *ProductRequest) (*Product, error)
+	Update(context.Context, *Product) (*Product, error)
 	DeleteProduct(context.Context, *GetProductId) (*Empty, error)
-	GetProduct(context.Context, *GetProductId) (*Product, error)
+	GetProduct(context.Context, *GetProductId) (*ProductResponse, error)
 	GetProducts(context.Context, *Empty) (*Products, error)
 }
 
@@ -672,13 +746,13 @@ func (*UnimplementedProductServiceServer) CreateType(ctx context.Context, req *T
 func (*UnimplementedProductServiceServer) CreateCategory(ctx context.Context, req *CategoryRequest) (*Category, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCategory not implemented")
 }
-func (*UnimplementedProductServiceServer) Update(ctx context.Context, req *ProductRequest) (*Product, error) {
+func (*UnimplementedProductServiceServer) Update(ctx context.Context, req *Product) (*Product, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (*UnimplementedProductServiceServer) DeleteProduct(ctx context.Context, req *GetProductId) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteProduct not implemented")
 }
-func (*UnimplementedProductServiceServer) GetProduct(ctx context.Context, req *GetProductId) (*Product, error) {
+func (*UnimplementedProductServiceServer) GetProduct(ctx context.Context, req *GetProductId) (*ProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProduct not implemented")
 }
 func (*UnimplementedProductServiceServer) GetProducts(ctx context.Context, req *Empty) (*Products, error) {
@@ -744,7 +818,7 @@ func _ProductService_CreateCategory_Handler(srv interface{}, ctx context.Context
 }
 
 func _ProductService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProductRequest)
+	in := new(Product)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -756,7 +830,7 @@ func _ProductService_Update_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/product.ProductService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).Update(ctx, req.(*ProductRequest))
+		return srv.(ProductServiceServer).Update(ctx, req.(*Product))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -889,6 +963,59 @@ func (m *Products) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			i--
 			dAtA[i] = 0xa
 		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ProductResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ProductResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ProductResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.Type) > 0 {
+		i -= len(m.Type)
+		copy(dAtA[i:], m.Type)
+		i = encodeVarintProduct(dAtA, i, uint64(len(m.Type)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Category) > 0 {
+		i -= len(m.Category)
+		copy(dAtA[i:], m.Category)
+		i = encodeVarintProduct(dAtA, i, uint64(len(m.Category)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.Price != 0 {
+		i = encodeVarintProduct(dAtA, i, uint64(m.Price))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintProduct(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
@@ -1230,6 +1357,33 @@ func (m *Products) Size() (n int) {
 	return n
 }
 
+func (m *ProductResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovProduct(uint64(l))
+	}
+	if m.Price != 0 {
+		n += 1 + sovProduct(uint64(m.Price))
+	}
+	l = len(m.Category)
+	if l > 0 {
+		n += 1 + l + sovProduct(uint64(l))
+	}
+	l = len(m.Type)
+	if l > 0 {
+		n += 1 + l + sovProduct(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
 func (m *Empty) Size() (n int) {
 	if m == nil {
 		return 0
@@ -1444,10 +1598,176 @@ func (m *Products) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Products = append(m.Products, &Product{})
+			m.Products = append(m.Products, &ProductResponse{})
 			if err := m.Products[len(m.Products)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipProduct(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthProduct
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ProductResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowProduct
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ProductResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ProductResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowProduct
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthProduct
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthProduct
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Price", wireType)
+			}
+			m.Price = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowProduct
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Price |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Category", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowProduct
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthProduct
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthProduct
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Category = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowProduct
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthProduct
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthProduct
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Type = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

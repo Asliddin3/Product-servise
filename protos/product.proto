@@ -6,15 +6,20 @@ service ProductService{
   rpc Create(ProductRequest)returns (Product);
   rpc CreateType(TypeRequest)returns (Type);
   rpc CreateCategory(CategoryRequest)returns (Category);
-  rpc Update (ProductRequest) returns (Product);
+  rpc Update (Product) returns (Product);
   rpc DeleteProduct (GetProductId) returns (Empty);
-  rpc GetProduct (GetProductId) returns (Product);
+  rpc GetProduct (GetProductId) returns (ProductResponse);
   rpc GetProducts (Empty) returns (Products);
 }
 message Products {
-  repeated Product products= 1;
+  repeated ProductResponse products= 1;
 }
-
+message ProductResponse {
+  string name = 1;
+  int64 price=2;
+  string category = 3;
+  string type =4;
+}
 
 message Empty {}
 

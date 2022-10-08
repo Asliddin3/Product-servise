@@ -44,6 +44,86 @@ func (r *productRepo) CreateCategory(req *pb.CategoryRequest) (*pb.Category, err
 	}
 	return &CategoryRepo, nil
 }
+func (r *productRepo) GetProducts(req *pb.Empty) (*pb.Products, error) {
+	rows, err := r.db.Query(`
+	select
+	p.name,
+	p.price,
+	c.name,
+	t.name
+	from products
+	inner join categories c
+	on c.id=p.categoryid
+	inner join types t
+	on t.id=p.typeid
+	`)
+	if err != nil {
+		return &pb.Products{}, err
+	}
+	var products pb.Products
+	for rows.Next() {
+		product := pb.ProductResponse{}
+		err := rows.Scan(&product.Name,
+			&product.Price,
+			&product.Category,
+			&product.Type)
+		if err != nil {
+			return &pb.Products{}, err
+		}
+		products.Products=append(products.Products, &product)
+	}
+	return &products,nil
+}
+
+func (r *productRepo) GetProduct(req *pb.GetProductId) (*pb.ProductResponse, error) {
+	product := pb.ProductResponse{}
+	err := r.db.QueryRow(`
+	select
+	p.name,
+	p.price,
+	c.name,
+	t.name
+	from products
+	inner join categories c
+	on c.id=p.categoryid
+	inner join types t
+	on t.id=p.typeid
+	where p.id=$1
+	`, req.Id).Scan(&product.Name, &product.Price,
+		&product.Category,
+		&product.Type,
+	)
+	if err != nil {
+		return &pb.ProductResponse{}, err
+	}
+	return &product, nil
+}
+
+func (r *productRepo) Update(req *pb.Product) (*pb.Product, error) {
+	_, err := r.db.Exec(`
+	update table products
+	set name=$1,
+	categoryid=$2,
+	typeid=$3
+	where id=$4`, req.Name,
+		req.Categoryid,
+		req.Typeid,
+		req.Id)
+	if err != nil {
+		return &pb.Product{}, err
+	}
+	return req, nil
+}
+
+func (r *productRepo) DeleteProduct(req *pb.GetProductId) (*pb.Empty, error) {
+	_, err := r.db.Exec(`
+	delete from products
+	where id=$1`, req.Id)
+	if err != nil {
+		return &pb.Empty{}, err
+	}
+	return &pb.Empty{}, nil
+}
 
 func (r *productRepo) Create(req *pb.ProductRequest) (*pb.Product, error) {
 	productRepo := pb.Product{}
