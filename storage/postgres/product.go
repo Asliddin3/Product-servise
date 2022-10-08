@@ -47,7 +47,7 @@ func (r *productRepo) CreateCategory(req *pb.CategoryRequest) (*pb.Category, err
 func (r *productRepo) GetProducts(req *pb.Empty) (*pb.Products, error) {
 	rows, err := r.db.Query(`
 	select
-	p.id
+	p.id,
 	p.name,
 	p.price,
 	c.name,
