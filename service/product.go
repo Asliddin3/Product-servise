@@ -34,7 +34,7 @@ func (s *ProductService) Create(ctx context.Context,req *pb.ProductRequest)(*pb.
 func (s *ProductService) CreateType(ctx context.Context,req *pb.TypeRequest)(*pb.Type,error){
 	typeReq,err:=s.storage.Product().CreateType(req)
 	if err != nil {
-		s.logger.Error("error creating product",l.Any("error creating product",err))
+		s.logger.Error("error creating type",l.Any("error creating type",err))
 		return &pb.Type{},status.Error(codes.Internal,"something went internal input")
 	}
 	return typeReq,nil
@@ -42,7 +42,7 @@ func (s *ProductService) CreateType(ctx context.Context,req *pb.TypeRequest)(*pb
 func (s *ProductService) CreateCategory(ctx context.Context,req *pb.CategoryRequest)(*pb.Category,error){
 	categoryReq,err:=s.storage.Product().CreateCategory(req)
 	if err != nil {
-		s.logger.Error("error creating product",l.Any("error creating product",err))
+		s.logger.Error("error creating category",l.Any("error creating category",err))
 		return &pb.Category{},status.Error(codes.Internal,"something went internal input")
 	}
 	return categoryReq,nil

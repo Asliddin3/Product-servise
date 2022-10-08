@@ -6,6 +6,20 @@ service ProductService{
   rpc Create(ProductRequest)returns (Product);
   rpc CreateType(TypeRequest)returns (Type);
   rpc CreateCategory(CategoryRequest)returns (Category);
+  rpc Update (ProductRequest) returns (Product);
+  rpc DeleteProduct (GetProductId) returns (Empty);
+  rpc GetProduct (GetProductId) returns (Product);
+  rpc GetProducts (Empty) returns (Products);
+}
+message Products {
+  repeated Product products= 1;
+}
+
+
+message Empty {}
+
+message GetProductId {
+  int64 id = 1;
 }
 message TypeRequest{
   string name= 1;

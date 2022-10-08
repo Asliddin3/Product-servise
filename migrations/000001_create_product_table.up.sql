@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS types(
 CREATE Table IF NOT EXISTS products(
   id SERIAL PRIMARY KEY,
   name TEXT,
+  price int,
   categoryid INT REFERENCES categories(id),
   typeid INT REFERENCES types(id)
 );
