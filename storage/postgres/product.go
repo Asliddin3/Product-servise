@@ -47,11 +47,12 @@ func (r *productRepo) CreateCategory(req *pb.CategoryRequest) (*pb.Category, err
 func (r *productRepo) GetProducts(req *pb.Empty) (*pb.Products, error) {
 	rows, err := r.db.Query(`
 	select
+	p.id
 	p.name,
 	p.price,
 	c.name,
 	t.name
-	from products
+	from products p
 	inner join categories c
 	on c.id=p.categoryid
 	inner join types t
@@ -63,7 +64,9 @@ func (r *productRepo) GetProducts(req *pb.Empty) (*pb.Products, error) {
 	var products pb.Products
 	for rows.Next() {
 		product := pb.ProductResponse{}
-		err := rows.Scan(&product.Name,
+		err := rows.Scan(
+			&product.Id,
+			&product.Name,
 			&product.Price,
 			&product.Category,
 			&product.Type)
@@ -83,7 +86,7 @@ func (r *productRepo) GetProduct(req *pb.GetProductId) (*pb.ProductResponse, err
 	p.price,
 	c.name,
 	t.name
-	from products
+	from products p
 	inner join categories c
 	on c.id=p.categoryid
 	inner join types t
