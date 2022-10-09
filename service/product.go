@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 
 	pb "github.com/Asliddin3/Product-servise/genproto"
 	l "github.com/Asliddin3/Product-servise/pkg/logger"
@@ -33,11 +34,12 @@ func (s *ProductService) Update(ctx context.Context, req *pb.Product) (*pb.Produ
 
 func (s *ProductService) GetProducts(ctx context.Context, req *pb.Empty) (*pb.Products, error) {
 	products, err := s.storage.Product().GetProducts(req)
+	fmt.Println(products, err)
 	if err != nil {
 		s.logger.Error("error while geting products", l.Any("error getting products", err))
 		return &pb.Products{}, status.Error(codes.Internal, "something went wrong")
 	}
-	return products, nil
+	return products,nil
 }
 
 func (s *ProductService) GetProduct(ctx context.Context, req *pb.GetProductId) (*pb.ProductResponse, error) {

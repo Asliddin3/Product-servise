@@ -61,7 +61,7 @@ func (r *productRepo) GetProducts(req *pb.Empty) (*pb.Products, error) {
 	if err != nil {
 		return &pb.Products{}, err
 	}
-	var products pb.Products
+	products := pb.Products{}
 	for rows.Next() {
 		product := pb.ProductResponse{}
 		err := rows.Scan(
@@ -73,9 +73,9 @@ func (r *productRepo) GetProducts(req *pb.Empty) (*pb.Products, error) {
 		if err != nil {
 			return &pb.Products{}, err
 		}
-		products.Products=append(products.Products, &product)
+		products.Products = append(products.Products, &product)
 	}
-	return &products,nil
+	return &products, nil
 }
 
 func (r *productRepo) GetProduct(req *pb.GetProductId) (*pb.ProductResponse, error) {
@@ -96,6 +96,7 @@ func (r *productRepo) GetProduct(req *pb.GetProductId) (*pb.ProductResponse, err
 		&product.Category,
 		&product.Type,
 	)
+	fmt.Println(err)
 	if err != nil {
 		return &pb.ProductResponse{}, err
 	}
@@ -104,11 +105,13 @@ func (r *productRepo) GetProduct(req *pb.GetProductId) (*pb.ProductResponse, err
 
 func (r *productRepo) Update(req *pb.Product) (*pb.Product, error) {
 	_, err := r.db.Exec(`
-	update table products
+	update products
 	set name=$1,
-	categoryid=$2,
-	typeid=$3
-	where id=$4`, req.Name,
+	price=$2,
+	categoryid=$3,
+	typeid=$4
+	where id=$5`, req.Name,
+		req.Price,
 		req.Categoryid,
 		req.Typeid,
 		req.Id)
