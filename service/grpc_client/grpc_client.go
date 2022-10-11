@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/Asliddin3/Product-servise/config"
-	productPb "github.com/Asliddin3/Product-servise/genproto"
+	productPb "github.com/Asliddin3/Product-servise/genproto/product"
 	"google.golang.org/grpc"
 )
 

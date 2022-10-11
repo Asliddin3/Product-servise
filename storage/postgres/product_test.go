@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/Asliddin3/Product-servise/config"
-	pb "github.com/Asliddin3/Product-servise/genproto"
+	pb "github.com/Asliddin3/Product-servise/genproto/product"
 	"github.com/Asliddin3/Product-servise/pkg/db"
 	"github.com/Asliddin3/Product-servise/storage/repo"
 	"github.com/stretchr/testify/suite"

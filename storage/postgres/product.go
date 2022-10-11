@@ -3,7 +3,7 @@ package postgres
 import (
 	"fmt"
 
-	pb "github.com/Asliddin3/Product-servise/genproto"
+	pb "github.com/Asliddin3/Product-servise/genproto/product"
 	"github.com/jmoiron/sqlx"
 )
 
