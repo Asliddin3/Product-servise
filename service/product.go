@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	pb "github.com/Asliddin3/Product-servise/genproto"
+	pb "github.com/Asliddin3/Product-servise/genproto/product/product"
 	l "github.com/Asliddin3/Product-servise/pkg/logger"
 	"github.com/Asliddin3/Product-servise/storage"
 	"github.com/jmoiron/sqlx"
