@@ -1,10 +1,3 @@
-# github.com/Asliddin3/store-servis v0.0.0-20221010164057-337a86f64029
-## explicit; go 1.18
-github.com/Asliddin3/store-servis/genproto
-github.com/Asliddin3/store-servis/pkg/logger
-github.com/Asliddin3/store-servis/storage
-github.com/Asliddin3/store-servis/storage/postgres
-github.com/Asliddin3/store-servis/storage/repo
 # github.com/davecgh/go-spew v1.1.1
 ## explicit
 github.com/davecgh/go-spew/spew

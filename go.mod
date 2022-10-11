@@ -3,7 +3,6 @@ module github.com/Asliddin3/Product-servise
 go 1.18
 
 require (
-	github.com/Asliddin3/store-servis v0.0.0-20221010164057-337a86f64029
 	github.com/golang/protobuf v1.5.2
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/lib/pq v1.10.7

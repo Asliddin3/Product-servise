@@ -3,7 +3,7 @@ CURRENT_DIR=$(pwd)
 
 for module in $(find $CURRENT_DIR/protos/* -type d); do
     protoc -I /usr/local/include \
-           -I $GOPATH/pkg/mod/github.com/gogo/protobuf@v1.3.2 \
+           -I $GOPATH/home/asliddin/go/pkg/mod/github.com/gogo/protobuf@v1.3.2 \
            -I $CURRENT_DIR/protos/ \
             --gofast_out=plugins=grpc:$CURRENT_DIR/genproto/ \
             $module/*.proto;

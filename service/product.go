@@ -29,12 +29,12 @@ func NewProductService(store *grpcclient.ServiceManager, db *sqlx.DB, log l.Logg
 }
 
 func (s *ProductService) CreateProduct(ctx context.Context, req *pb.ProductFullInfo) (*pb.ProductFullInfoResponse, error) {
-	productReq := pb.ProductRequest{Name: req.Name,
+	productReq := &pb.ProductRequest{Name: req.Name,
 		Categoryid: req.Categoryid,
 		Price:      req.Price,
 		Typeid:     req.Typeid,
 	}
-	productResp, err := s.storage.Product().CreateProduct(&productReq)
+	productResp, err := s.storage.Product().Create(productReq)
 	productInfo := pb.ProductFullInfoResponse{
 		Id:         productResp.Id,
 		Name:       productResp.Name,
@@ -42,9 +42,10 @@ func (s *ProductService) CreateProduct(ctx context.Context, req *pb.ProductFullI
 		Categoryid: productResp.Categoryid,
 		Typeid:     productResp.Typeid,
 	}
-
+	fmt.Println(productResp, err)
 	if err != nil {
-		return &pb.ProductFullInfoResponse{}, err
+		s.logger.Error("error while creating product full info in product database", l.Any("error creating product full info in product database", err))
+		return &pb.ProductFullInfoResponse{}, status.Error(codes.Internal, "something went wrong")
 	}
 	for _, storeResp := range req.Stores {
 		storeReq := store.StoreRequest{}
@@ -55,21 +56,31 @@ func (s *ProductService) CreateProduct(ctx context.Context, req *pb.ProductFullI
 				Street:   addressResp.Street,
 			})
 		}
+		addressesResp := []*store.Address{}
+		for _, addresStoreInfo := range storeResp.Addresses {
+			addressesResp = append(addressesResp, &store.Address{
+				District: addresStoreInfo.District,
+				Street:   addresStoreInfo.Street,
+			})
+		}
+		storeReq.Addresses = addressesResp
 		storeInfo, err := s.store.StoreService().Create(context.Background(), &storeReq)
-		addressesResp := []*pb.Address{}
+		if err != nil {
+			s.logger.Error("error while creating product full info in store database", l.Any("error creating product ful info in store database", err))
+			return &pb.ProductFullInfoResponse{}, status.Error(codes.Internal, "something went wrong")
+		}
+		addressesRespPorudct := []*pb.Address{}
 		for _, addresStoreInfo := range storeInfo.Addresses {
-			addressesResp = append(addressesResp, &pb.Address{
+			addressesRespPorudct = append(addressesRespPorudct, &pb.Address{
 				District: addresStoreInfo.District,
 				Street:   addresStoreInfo.Street,
 			})
 		}
 		productInfo.Stores = append(productInfo.Stores, &pb.Store{
 			Name:      storeInfo.Name,
-			Addresses: addressesResp,
+			Addresses: addressesRespPorudct,
 		})
-		if err != nil {
-			return &pb.ProductFullInfoResponse{}, err
-		}
+
 	}
 	return &productInfo, nil
 
