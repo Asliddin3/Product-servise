@@ -4,21 +4,22 @@ import (
 	"fmt"
 
 	"github.com/Asliddin3/Product-servise/config"
-	productPb "github.com/Asliddin3/Product-servise/genproto/product"
+	// productPb "github.com/Asliddin3/Product-servise/genproto/store"
+	storePB "github.com/Asliddin3/Product-servise/genproto/store"
+
 	"google.golang.org/grpc"
 )
 
 type ServiceManager struct {
 	conf           config.Config
-	productService productPb.ProductServiceClient
+	storeServisce  storePB.StoreserviceClient
 }
 
-func NewStore(cnfg config.Config) (*ServiceManager, error) {
-	connProduct, err := grpc.Dial(
+func New(cnfg config.Config) (*ServiceManager, error) {
+	connStore, err := grpc.Dial(
 		fmt.Sprintf("%s:%d", cnfg.ReviewServiceHost, cnfg.ReviewServicePort),
 		grpc.WithInsecure(),
 	)
-
 	if err != nil {
 		return nil, fmt.Errorf("error while dial product service: host: %s and port: %d",
 			cnfg.ReviewServiceHost, cnfg.ReviewServicePort)
@@ -26,12 +27,12 @@ func NewStore(cnfg config.Config) (*ServiceManager, error) {
 
 	serviceManager := &ServiceManager{
 		conf:           cnfg,
-		productService: productPb.NewProductServiceClient(connProduct),
+		storeServisce: storePB.NewStoreserviceClient(connStore),
 	}
 
 	return serviceManager, nil
 }
 
-func (s *ServiceManager) ProductService() productPb.ProductServiceClient {
-	return s.productService
+func (s *ServiceManager) ProductService() storePB.StoreserviceClient {
+	return s.storeServisce
 }

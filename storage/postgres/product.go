@@ -10,10 +10,17 @@ import (
 type productRepo struct {
 	db *sqlx.DB
 }
+type storeRepo struct{
+	db *sqlx.DB
+}
+
 
 func NewProductRepo(db *sqlx.DB) *productRepo {
 	return &productRepo{db: db}
 }
+
+
+
 func (r *productRepo) CreateType(req *pb.TypeRequest) (*pb.Type, error) {
 	typeRepo := pb.Type{}
 	err := r.db.QueryRow(
