@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	pb "githab.com/Asliddin3/Product-servise/genproto/store/store"
+	pb "github.com/Asliddin3/Product-servise/genproto/store"
 	"github.com/Asliddin3/store-servis/pkg/logger"
 	"github.com/Asliddin3/store-servis/storage"
 	"google.golang.org/grpc/codes"
