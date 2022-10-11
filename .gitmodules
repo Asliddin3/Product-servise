@@ -1,0 +1,4 @@
+[submodule "cmd/Proto-Submodule-Product-servise"]
+	path = cmd/Proto-Submodule-Product-servise
+	url = https://github.com/Asliddin3/Proto-Submodule-Product-servise.git
+	branch = main
