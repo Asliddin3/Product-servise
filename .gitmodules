@@ -2,3 +2,7 @@
 	path = cmd/Proto-Submodule-Product-servise
 	url = https://github.com/Asliddin3/Proto-Submodule-Product-servise.git
 	branch = main
+[submodule "Proto-Submodule-Product-servise"]
+	path = Proto-Submodule-Product-servise
+	url = https://github.com/Asliddin3/Proto-Submodule-Product-servise.git
+	branch = main
