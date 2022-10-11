@@ -4,22 +4,36 @@ import (
 	"fmt"
 
 	pb "github.com/Asliddin3/Product-servise/genproto/product"
+	// "github.com/Asliddin3/Product-servise/service"
 	"github.com/jmoiron/sqlx"
 )
 
 type productRepo struct {
 	db *sqlx.DB
 }
-type storeRepo struct{
-	db *sqlx.DB
-}
-
 
 func NewProductRepo(db *sqlx.DB) *productRepo {
 	return &productRepo{db: db}
 }
 
+func (r *productRepo) CreateProduct(req *pb.ProductRequest) (*pb.Product, error) {
+	productRepo := pb.Product{}
+	err := r.db.QueryRow(`
+	insert into products(name,price,
+	categoryid,typeid)
+	values($1,$2,$3,$4)
+	returning id,name,price,categoryid,typeid
+	`).Scan(&productRepo.Id,
+		&productRepo.Name,
+		&productRepo.Price,
+		&productRepo.Categoryid,
+		&productRepo.Typeid)
+	if err != nil {
+		return nil, err
+	}
+	return &productRepo, nil
 
+}
 
 func (r *productRepo) CreateType(req *pb.TypeRequest) (*pb.Type, error) {
 	typeRepo := pb.Type{}

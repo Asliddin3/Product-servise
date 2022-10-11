@@ -13,7 +13,7 @@ import (
 type ProductSuiteTest struct {
 	suite.Suite
 	CleanUpFunc func()
-	Repository repo.ProductStorageI
+	Repository  repo.ProductStorageI
 }
 
 func (suite *ProductSuiteTest) SetupSuite() {

@@ -33,6 +33,7 @@ func New(cnfg config.Config) (*ServiceManager, error) {
 	return serviceManager, nil
 }
 
-func (s *ServiceManager) ProductService() storePB.StoreserviceClient {
+
+func (s *ServiceManager) StoreService() storePB.StoreserviceClient {
 	return s.storeServisce
 }
