@@ -125,6 +125,7 @@ func (r *productRepo) DeleteProduct(req *pb.GetProductId) (*pb.Empty, error) {
 	_, err := r.db.Exec(`
 	delete from products
 	where id=$1`, req.Id)
+	fmt.Println(err)
 	if err != nil {
 		return &pb.Empty{}, err
 	}
