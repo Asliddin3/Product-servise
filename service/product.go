@@ -107,6 +107,7 @@ func (s *ProductService) GetProducts(ctx context.Context, req *pb.Empty) (*pb.Pr
 
 func (s *ProductService) GetProduct(ctx context.Context, req *pb.GetProductId) (*pb.ProductResponse, error) {
 	product, err := s.storage.Product().GetProduct(req)
+	fmt.Println(product)
 	if err != nil {
 		s.logger.Error("error while geting product", l.Any("error deleting product", err))
 		return &pb.ProductResponse{}, status.Error(codes.Internal, "somethig went wrong")
